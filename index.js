@@ -5,6 +5,7 @@ let curScore = 0, highScore = localStorage.getItem("high_score") || 0;
 let missed = 0
 let popSound = new Audio("./sounds/pop.mp3");
 let gameOverSound = new Audio("./sounds/gameOver.wav");
+let screenWidth = screen.width > 600 ? 900 : 350;
 
 function rColor() {
     return colors[Math.floor(Math.random() * 5)];
@@ -43,13 +44,14 @@ function addBubble() {
     let newDiv = document.createElement("div");
     newDiv.classList.add("bubble");
     newDiv.style.backgroundColor = rColor();
-    newDiv.style.left = `${Math.floor(Math.random() * 900)}px`;
+    newDiv.style.left = `${Math.floor(Math.random() * screenWidth)}px`;
     cont.appendChild(newDiv);
-    newDiv.addEventListener("mouseenter", (evnt) => {
-        popSound.play();
-        popBubble(evnt);
-        addBubble();
-    });
+
+    if (screenWidth === 900)
+        newDiv.addEventListener("mouseenter", (evnt) => { popSound.play(); popBubble(evnt); addBubble(); });
+    else
+        newDiv.addEventListener("touchstart", (evnt) => { popSound.play(); popBubble(evnt); addBubble(); });
+
     newDiv.addEventListener("animationend", () => {
         newDiv.remove();
         missed++;
