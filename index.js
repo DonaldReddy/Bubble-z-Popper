@@ -3,7 +3,7 @@ let cont = document.getElementsByClassName("container")[0];
 let curScore = 0, highScore = localStorage.getItem("high_score") || 0;
 let missed = 0
 let popSound = new Audio("./sounds/pop.mp3");
-let gameOverSound = new Audio("./sounds/gameOver.wav");
+let gameOverSound = new Audio("./sounds/gameover.mp3");
 let screenWidth = screen.width > 600 ? 900 : 350;
 let backGroundMusic = new Audio("./sounds/background.mp3");
 
@@ -21,7 +21,12 @@ function rColor() {
 }
 
 function gameOver() {
+
+    document.getElementsByClassName("start")[0].disabled = false;
+    document.getElementsByClassName("start")[0].classList.add("dis");
+
     backGroundMusic.volume = 0;
+    gameOverSound.volume = 0.3
     gameOverSound.play();
     updateHighScore();
     cont.style.display = "flex";
@@ -85,6 +90,8 @@ function addBubble() {
 }
 
 function start() {
+    document.getElementsByClassName("start")[0].disabled = true;
+    document.getElementsByClassName("start")[0].classList.remove("dis");
     backGroundMusic.volume = 0.3
     curScore = 0;
     missed = 0;
