@@ -26,6 +26,13 @@ function gameOver() {
     updateHighScore();
     cont.style.display = "flex";
     document.getElementsByClassName("game-over")[0].style.display = "flex";
+    cont.removeEventListener("touchstart", (event) => {
+        inside(event);
+    });
+    cont.removeEventListener("touchmove", (event) => {
+        inside(event);
+    });
+    document.getElementsByClassName("try-again")[0].addEventListener("touchstart", start);
 }
 
 function updateHighScore() {

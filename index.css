@@ -86,6 +86,7 @@ body {
     justify-content: space-evenly;
     align-items: center;
     font-weight: 700;
+    position: absolute;
 }
 
 .try-again {
